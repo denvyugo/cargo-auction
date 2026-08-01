@@ -1,10 +1,11 @@
 import { createRoute } from '@tanstack/react-router'
 import { rootRoute } from '@/app/routes/root-route'
 import { auctionKeys } from '@/entities/auction/api/queries'
-import { fetchAuction, NotFoundError } from '@/entities/auction/api/auction-api'
+import { fetchAuction } from '@/entities/auction/api/auction-api'
 import { betKeys } from '@/entities/bet/api/queries'
 import { fetchBets } from '@/entities/bet/api/bet-api'
 import { AuctionDetailPage } from '@/pages/auction-detail/AuctionDetailPage'
+import { NotFoundError } from '@/shared/api/errors'
 import { ErrorState } from '@/shared/ui/ErrorState/ErrorState'
 
 export const auctionDetailRoute = createRoute({
@@ -24,10 +25,13 @@ export const auctionDetailRoute = createRoute({
     ])
   },
   component: AuctionDetailPage,
-  // Without this, a `NotFoundError` thrown by `fetchAuction` (on a 404 from
-  // the mock API) would reject the loader's `Promise.all` and fall through
-  // to TanStack Router's generic default error boundary instead of our
-  // `ErrorState` component.
+  // Without this, a `NotFoundError` thrown by `fetchAuction` or `fetchBets`
+  // (on a 404 from the mock API) would reject the loader's `Promise.all` and
+  // fall through to TanStack Router's generic default error boundary instead
+  // of our `ErrorState` component. Both `fetchAuction` and `fetchBets` throw
+  // the *same* `NotFoundError` class (from `@/shared/api/errors`) on a 404,
+  // so this check fires regardless of which of the two parallel requests
+  // rejects first — unlike a naive fix that only special-cased one of them.
   errorComponent: ({ error }) => (
     <div className="app-layout">
       {error instanceof NotFoundError ? (

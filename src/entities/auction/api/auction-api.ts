@@ -1,4 +1,5 @@
 import { client } from '@/shared/api/client'
+import { NotFoundError } from '@/shared/api/errors'
 import type { AuctionListRequest, AuctionListResponse, AuctionShowResponse } from '@/shared/api/types'
 
 export async function fetchAuctionList(
@@ -32,11 +33,4 @@ export async function fetchAuction(uuid: string): Promise<AuctionShowResponse> {
   }
 
   return data
-}
-
-export class NotFoundError extends Error {
-  constructor(message: string) {
-    super(message)
-    this.name = 'NotFoundError'
-  }
 }

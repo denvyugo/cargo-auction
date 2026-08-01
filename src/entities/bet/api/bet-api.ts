@@ -1,4 +1,5 @@
 import { client } from '@/shared/api/client'
+import { NotFoundError } from '@/shared/api/errors'
 import type { BetListResponse, SetBetRequest } from '@/shared/api/types'
 
 export async function fetchBets(auctionUuid: string): Promise<BetListResponse> {
@@ -7,7 +8,7 @@ export async function fetchBets(auctionUuid: string): Promise<BetListResponse> {
   })
 
   if (response.status === 404) {
-    throw new Error('Аукцион не найден')
+    throw new NotFoundError('Аукцион не найден')
   }
 
   if (error || !data) {
