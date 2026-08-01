@@ -1,0 +1,30 @@
+.error-state {
+  padding: var(--space-xl);
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.error-state__title {
+  color: var(--color-danger);
+}
+
+.error-state__message {
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+}
+
+.error-state__retry {
+  margin-top: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.error-state__retry:hover {
+  background: var(--color-bg);
+}
