@@ -12,10 +12,16 @@ async function enableMocking() {
   return worker.start({ onUnhandledRequest: 'bypass' })
 }
 
-enableMocking().then(() => {
+function mountApp() {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <AppProviders />
     </StrictMode>,
   )
-})
+}
+
+enableMocking()
+  .catch((error) => {
+    console.error('Failed to start mock service worker, continuing without it:', error)
+  })
+  .then(mountApp)
