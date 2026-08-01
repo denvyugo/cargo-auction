@@ -1,10 +1,11 @@
 import { createRoute } from '@tanstack/react-router'
 import { rootRoute } from '@/app/routes/root-route'
 import { auctionKeys } from '@/entities/auction/api/queries'
-import { fetchAuction } from '@/entities/auction/api/auction-api'
+import { fetchAuction, NotFoundError } from '@/entities/auction/api/auction-api'
 import { betKeys } from '@/entities/bet/api/queries'
 import { fetchBets } from '@/entities/bet/api/bet-api'
-import { AuctionDetailPlaceholder } from '@/app/routes/auction-detail-placeholder'
+import { AuctionDetailPage } from '@/pages/auction-detail/AuctionDetailPage'
+import { ErrorState } from '@/shared/ui/ErrorState/ErrorState'
 
 export const auctionDetailRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -22,5 +23,18 @@ export const auctionDetailRoute = createRoute({
       }),
     ])
   },
-  component: AuctionDetailPlaceholder,
+  component: AuctionDetailPage,
+  // Without this, a `NotFoundError` thrown by `fetchAuction` (on a 404 from
+  // the mock API) would reject the loader's `Promise.all` and fall through
+  // to TanStack Router's generic default error boundary instead of our
+  // `ErrorState` component.
+  errorComponent: ({ error }) => (
+    <div className="app-layout">
+      {error instanceof NotFoundError ? (
+        <ErrorState title="Аукцион не найден" message={error.message} />
+      ) : (
+        <ErrorState />
+      )}
+    </div>
+  ),
 })

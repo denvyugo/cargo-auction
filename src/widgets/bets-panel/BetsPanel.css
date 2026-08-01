@@ -1,0 +1,44 @@
+.bets-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.bets-panel__hidden,
+.bets-panel__empty {
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+}
+
+.bets-panel__skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.bets-panel__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.bets-panel__table th,
+.bets-panel__table td {
+  padding: var(--space-sm);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bets-panel__table th {
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.bets-panel__row--win td {
+  color: var(--color-success);
+  font-weight: 600;
+}

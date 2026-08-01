@@ -28,3 +28,9 @@ export const TRADING_STATUS_LABELS: Record<string, string> = {
   Confirmed: 'Подтверждён',
   Unknown: 'Неизвестный',
 }
+
+export const OP_TYPE_LABELS: Record<string, string> = {
+  Loading: 'Погрузка',
+  Unloading: 'Выгрузка',
+  Unknown: 'Неизвестно',
+}

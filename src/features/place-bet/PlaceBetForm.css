@@ -1,0 +1,9 @@
+.place-bet {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-sm);
+}
+
+.place-bet .input-field {
+  flex: 1;
+}
