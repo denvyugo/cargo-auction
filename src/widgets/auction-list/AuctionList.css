@@ -1,0 +1,11 @@
+.auction-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.auction-list__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-md);
+}

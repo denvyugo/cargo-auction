@@ -1,0 +1,79 @@
+.auction-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.auction-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+}
+
+.auction-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  font-size: 0.8125rem;
+}
+
+.auction-card__type {
+  color: var(--color-text-muted);
+}
+
+.auction-card__status {
+  padding: 2px var(--space-xs);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.auction-card__route {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-heading);
+}
+
+.auction-card__route-arrow {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.auction-card__organizer {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.auction-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-top: auto;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+.auction-card__price {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.auction-card__cargo-num {
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+  font-family: var(--font-mono);
+}
