@@ -1,9 +1,9 @@
 import { getRouteApi } from '@tanstack/react-router'
 import { useAuctionList } from '@/entities/auction/api/use-auction-queries'
-import { AuctionCard } from '@/entities/auction/ui/AuctionCard'
 import { SkeletonCard } from '@/shared/ui/Skeleton/Skeleton'
 import { Pagination } from '@/shared/ui/Pagination/Pagination'
 import { ErrorState } from '@/shared/ui/ErrorState/ErrorState'
+import { AuctionCardWithPrefetch } from '@/widgets/auction-list/AuctionCardWithPrefetch'
 import './AuctionList.css'
 
 const PER_PAGE = 10
@@ -45,7 +45,7 @@ export function AuctionList() {
     <div className="auction-list">
       <div className="auction-list__grid">
         {auctions.map((auction) => (
-          <AuctionCard key={auction.main?.order_uid} auction={auction} />
+          <AuctionCardWithPrefetch key={auction.main?.order_uid} auction={auction} />
         ))}
       </div>
       <Pagination
