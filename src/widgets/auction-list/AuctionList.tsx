@@ -43,11 +43,15 @@ export function AuctionList() {
 
   return (
     <div className="auction-list">
-      <div className="auction-list__grid">
-        {auctions.map((auction) => (
-          <AuctionCardWithPrefetch key={auction.main?.order_uid} auction={auction} />
-        ))}
-      </div>
+      {auctions.length === 0 ? (
+        <p className="auction-list__empty">Аукционов не найдено</p>
+      ) : (
+        <div className="auction-list__grid">
+          {auctions.map((auction) => (
+            <AuctionCardWithPrefetch key={auction.main?.order_uid} auction={auction} />
+          ))}
+        </div>
+      )}
       <Pagination
         currentPage={data.meta?.current_page ?? page}
         lastPage={data.meta?.last_page ?? 1}
