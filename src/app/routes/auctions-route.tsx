@@ -1,6 +1,5 @@
-import { createRoute } from '@tanstack/react-router'
+import { createRoute, lazyRouteComponent } from '@tanstack/react-router'
 import { rootRoute } from '@/app/routes/root-route'
-import { AuctionsListPage } from '@/pages/auctions-list/AuctionsListPage'
 
 type AuctionsSearch = {
   page: number
@@ -17,5 +16,8 @@ export const auctionsRoute = createRoute({
   validateSearch: (search: Record<string, unknown>): AuctionsSearch => ({
     page: parsePage(search.page),
   }),
-  component: AuctionsListPage,
+  component: lazyRouteComponent(
+    () => import('@/pages/auctions-list/AuctionsListPage'),
+    'AuctionsListPage',
+  ),
 })

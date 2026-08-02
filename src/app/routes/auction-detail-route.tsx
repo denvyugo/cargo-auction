@@ -1,10 +1,9 @@
-import { createRoute } from '@tanstack/react-router'
+import { createRoute, lazyRouteComponent } from '@tanstack/react-router'
 import { rootRoute } from '@/app/routes/root-route'
 import { auctionKeys } from '@/entities/auction/api/queries'
 import { fetchAuction } from '@/entities/auction/api/auction-api'
 import { betKeys } from '@/entities/bet/api/queries'
 import { fetchBets } from '@/entities/bet/api/bet-api'
-import { AuctionDetailPage } from '@/pages/auction-detail/AuctionDetailPage'
 import { NotFoundError } from '@/shared/api/errors'
 import { ErrorState } from '@/shared/ui/ErrorState/ErrorState'
 
@@ -24,7 +23,10 @@ export const auctionDetailRoute = createRoute({
       }),
     ])
   },
-  component: AuctionDetailPage,
+  component: lazyRouteComponent(
+    () => import('@/pages/auction-detail/AuctionDetailPage'),
+    'AuctionDetailPage',
+  ),
   // Without this, a `NotFoundError` thrown by `fetchAuction` or `fetchBets`
   // (on a 404 from the mock API) would reject the loader's `Promise.all` and
   // fall through to TanStack Router's generic default error boundary instead
