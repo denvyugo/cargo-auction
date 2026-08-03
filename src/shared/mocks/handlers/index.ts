@@ -37,7 +37,16 @@ export const auctionHandlers = [
     const total = auctionStore.listItems.length
     const lastPage = Math.max(1, Math.ceil(total / perPage))
     const start = (page - 1) * perPage
-    const data = auctionStore.listItems.slice(start, start + perPage)
+    const data = auctionStore.listItems.slice(start, start + perPage).filter((item) => {
+      let aucType;
+      if (item.main?.auc_type) {
+        aucType = item.main.auc_type === 'Unknown' ? undefined : item.main.auc_type;
+      }
+      return (!body.cargo_num || item.main?.cargo_num === body.cargo_num)
+      && (!body.is_available || item.trading?.is_available === body.is_available)
+      && (!body.auc_type || (aucType !== undefined ? body.auc_type.includes(aucType) : true))
+      && (!body.load_city || item.route?.load?.city === body.load_city)}
+    )
 
     return HttpResponse.json({
       data,
