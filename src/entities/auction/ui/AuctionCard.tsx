@@ -22,6 +22,7 @@ export function AuctionCard({ auction, onMouseEnter }: AuctionCardProps) {
       params={{ auctionUuid: orderUid }}
       className="auction-card"
       onMouseEnter={onMouseEnter}
+      onTouchStart={onMouseEnter}
     >
       <div className="auction-card__header">
         <span className="auction-card__type">{AUC_TYPE_LABELS[aucType] ?? aucType}</span>
