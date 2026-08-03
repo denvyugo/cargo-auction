@@ -7,6 +7,7 @@ export async function fetchAuctionList(
 ): Promise<AuctionListResponse> {
   const { data, error, response } = await client.POST('/auctions/list', {
     body: {
+      ...params,
       page: params.page ?? 1,
       per_page: params.per_page ?? 10,
     },

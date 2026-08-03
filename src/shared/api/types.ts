@@ -9,3 +9,7 @@ export type BetItem = components['schemas']['BetItem']
 export type BetListResponse = components['schemas']['BetListResponse']
 export type SetBetRequest = components['schemas']['SetBetRequest']
 export type ValidationProblem = components['schemas']['ValidationProblem']
+
+export type STATUSES = components['schemas']['AuctionListItemTrading']['status']
+
+export type AuctionsListFilters = Partial<Omit<AuctionListRequest, 'page' | 'per_page'>>
