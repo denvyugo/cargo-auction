@@ -7,6 +7,7 @@ import { AuctionCardWithPrefetch } from '@/widgets/auction-list/AuctionCardWithP
 import './AuctionList.css'
 import { useState } from 'react';
 import { AUC_TYPE_LABELS } from '@/entities/auction/model/labels';
+import { CITIES } from '@/shared/mocks/data/store';
 
 const PER_PAGE = 10
 const SKELETON_COUNT = 6
@@ -77,6 +78,13 @@ export function AuctionList() {
     } });
   };
 
+  const handleLoadCitySelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    navigate({ search: (prev) => {
+      if (e.target.value) return ({ ...prev, load_city: e.target.value })
+      else return ({ ...prev, load_city: undefined })
+    } })
+  };
+
   const auctions = data.data ?? []
 
   return (
@@ -93,7 +101,7 @@ export function AuctionList() {
             onChange={handlerCargoNum}
           />
           <label className="auction-list__search-label" htmlFor="auction-list__search-input">
-            Наименование:&nbsp;
+            Тип:&nbsp;
           </label>
           <select
             id="auction-list__auc-type"
@@ -106,6 +114,24 @@ export function AuctionList() {
               <option key={aucType} value={aucType}>{AUC_TYPE_LABELS[aucType] ?? aucType}</option>
             ))}
           </select>
+          <label className="auction-list__search-label" htmlFor="auction-list__load-city">
+            Город загрузки:&nbsp;
+          </label>
+          <input
+            list="load-cities"
+            id="auction-list__load-city"
+            value={rest.load_city ?? ''}
+            onChange={handleLoadCitySelect}
+            placeholder="Type to search..."
+          />
+          <datalist id="load-cities">
+            {CITIES.map((city) => (
+              city.name && (
+              <option key={city.gcId} value={city.name}>
+                {city.name}
+              </option>
+            )))}
+          </datalist>
         </div>
       {auctions.length === 0 ? (
         <p className="auction-list__empty">Аукционов не найдено</p>

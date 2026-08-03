@@ -12,7 +12,7 @@ interface CityInfo {
   lon: number
 }
 
-const CITIES: CityInfo[] = [
+export const CITIES: CityInfo[] = [
   { name: 'Москва', fullName: 'Москва, Россия', gcId: 213, lat: 55.751244, lon: 37.618423 },
   { name: 'Санкт-Петербург', fullName: 'Санкт-Петербург, Россия', gcId: 2, lat: 59.938784, lon: 30.314997 },
   { name: 'Екатеринбург', fullName: 'Екатеринбург, Россия', gcId: 54, lat: 56.838011, lon: 60.597465 },
